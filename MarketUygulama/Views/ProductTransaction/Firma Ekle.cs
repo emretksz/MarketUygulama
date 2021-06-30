@@ -16,5 +16,10 @@ namespace MarketUygulama.ProductTransaction
         {
             InitializeComponent();
         }
+
+        private void Firma_Ekle_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -90,6 +90,7 @@
             this.Controls.Add(this.btnDon);
             this.Name = "Firma_Ekle";
             this.Text = "Firma_Ekle";
+            this.Load += new System.EventHandler(this.Firma_Ekle_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFirma)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

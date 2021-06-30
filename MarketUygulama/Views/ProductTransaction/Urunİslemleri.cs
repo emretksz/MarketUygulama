@@ -42,5 +42,10 @@ namespace MarketUygulama.ProductTransaction
             this.Close();
             frm.Show();
         }
+
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

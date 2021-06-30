@@ -36,7 +36,7 @@ namespace MarketUygulama.Views.ProductTransaction
         int id = 0;
         private void dgvKategori_DoubleClick(object sender, EventArgs e)
         {
-            var sonuc = dgvKategori.Rows[0].DataBoundItem as Categories;
+            var sonuc = dgvKategori.SelectedRows[0].DataBoundItem as Categories;
             id = sonuc.CategoryId;
         }
 
