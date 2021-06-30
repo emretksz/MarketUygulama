@@ -1,0 +1,525 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ET_Market_DbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cashiers">
+          <Key>
+            <PropertyRef Name="CashierId" />
+          </Key>
+          <Property Name="CashierId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KasiyerAdi" Type="varchar" MaxLength="150" />
+          <Property Name="KasiyerSoyad" Type="varchar" MaxLength="150" />
+          <Property Name="TcKimlik" Type="varchar" MaxLength="11" />
+          <Property Name="CepTel" Type="varchar" MaxLength="18" />
+          <Property Name="Adres" Type="varchar" MaxLength="500" />
+          <Property Name="GorevlioldKasa" Type="varchar" MaxLength="5" />
+          <Property Name="İseGirmeTarihi" Type="smalldatetime" />
+          <Property Name="İstenCikma" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Companyes">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MusteriAdi" Type="varchar" MaxLength="150" />
+          <Property Name="MusteriSoyadi" Type="varchar" MaxLength="150" />
+          <Property Name="TcNu" Type="varchar" MaxLength="11" />
+          <Property Name="CepTel" Type="varchar" MaxLength="18" />
+          <Property Name="EvTel" Type="varchar" MaxLength="15" />
+          <Property Name="Adres" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="UrunAdi" Type="varchar" MaxLength="200" />
+          <Property Name="UrunKodu" Type="varchar" MaxLength="5" />
+          <Property Name="AlisFiyati" Type="varchar" MaxLength="10" />
+          <Property Name="SatisFiyati" Type="varchar" MaxLength="10" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="RegisterDate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="SalesLists">
+          <Key>
+            <PropertyRef Name="SalesListId" />
+          </Key>
+          <Property Name="SalesListId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CashierId" Type="int" />
+          <Property Name="FaturaNu" Type="varchar" MaxLength="15" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="ToplamTutar" Type="varchar" MaxLength="20" />
+          <Property Name="KasaNu" Type="varchar" MaxLength="10" />
+          <Property Name="UrunAdi" Type="varchar" MaxLength="150" />
+          <Property Name="Adet" Type="varchar" MaxLength="50" />
+          <Property Name="Tarih" Type="smalldatetime" />
+          <Property Name="MusteriAdi" Type="varchar" MaxLength="150" />
+          <Property Name="MusteriSoyAdi" Type="varchar" MaxLength="150" />
+          <Property Name="Kasiyer" Type="varchar" MaxLength="150" />
+          <Property Name="TcNu" Type="varchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="Stocks">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="UrunAdi" Type="varchar" MaxLength="200" />
+          <Property Name="Kdv" Type="int" />
+          <Property Name="BirimFiyati" Type="varchar" MaxLength="50" />
+          <Property Name="Adet" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Companyes">
+          <End Role="Companyes" Type="Self.Companyes" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companyes">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesLists_Cashiers">
+          <End Role="Cashiers" Type="Self.Cashiers" Multiplicity="0..1" />
+          <End Role="SalesLists" Type="Self.SalesLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cashiers">
+              <PropertyRef Name="CashierId" />
+            </Principal>
+            <Dependent Role="SalesLists">
+              <PropertyRef Name="CashierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesLists_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="SalesLists" Type="Self.SalesLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="SalesLists">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesLists_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="SalesLists" Type="Self.SalesLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="SalesLists">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stocks_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Stocks" Type="Self.Stocks" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Stocks">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ET_Market_DbModelStoreContainer">
+          <EntitySet Name="Cashiers" EntityType="Self.Cashiers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companyes" EntityType="Self.Companyes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesLists" EntityType="Self.SalesLists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stocks" EntityType="Self.Stocks" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Companyes" Association="Self.FK_Products_Companyes">
+            <End Role="Companyes" EntitySet="Companyes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesLists_Cashiers" Association="Self.FK_SalesLists_Cashiers">
+            <End Role="Cashiers" EntitySet="Cashiers" />
+            <End Role="SalesLists" EntitySet="SalesLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesLists_Customers" Association="Self.FK_SalesLists_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="SalesLists" EntitySet="SalesLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesLists_Products" Association="Self.FK_SalesLists_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="SalesLists" EntitySet="SalesLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stocks_Products" Association="Self.FK_Stocks_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Stocks" EntitySet="Stocks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ET_Market_DbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cashiers">
+          <Key>
+            <PropertyRef Name="CashierId" />
+          </Key>
+          <Property Name="CashierId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KasiyerAdi" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="KasiyerSoyad" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TcKimlik" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="CepTel" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="GorevlioldKasa" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="İseGirmeTarihi" Type="DateTime" Precision="0" />
+          <Property Name="İstenCikma" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="SalesLists" Relationship="Self.FK_SalesLists_Cashiers" FromRole="Cashiers" ToRole="SalesLists" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Categories" FromRole="Categories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Companyes">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Companyes" FromRole="Companyes" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MusteriAdi" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="MusteriSoyadi" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TcNu" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="CepTel" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="EvTel" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SalesLists" Relationship="Self.FK_SalesLists_Customers" FromRole="Customers" ToRole="SalesLists" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="UrunAdi" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UrunKodu" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="AlisFiyati" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SatisFiyati" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="RegisterDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
+          <NavigationProperty Name="Companyes" Relationship="Self.FK_Products_Companyes" FromRole="Products" ToRole="Companyes" />
+          <NavigationProperty Name="SalesLists" Relationship="Self.FK_SalesLists_Products" FromRole="Products" ToRole="SalesLists" />
+          <NavigationProperty Name="Stocks" Relationship="Self.FK_Stocks_Products" FromRole="Products" ToRole="Stocks" />
+        </EntityType>
+        <EntityType Name="SalesLists">
+          <Key>
+            <PropertyRef Name="SalesListId" />
+          </Key>
+          <Property Name="SalesListId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CashierId" Type="Int32" />
+          <Property Name="FaturaNu" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cashiers" Relationship="Self.FK_SalesLists_Cashiers" FromRole="SalesLists" ToRole="Cashiers" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_SalesLists_Customers" FromRole="SalesLists" ToRole="Customers" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_SalesLists_Products" FromRole="SalesLists" ToRole="Products" />
+          <Property Name="ToplamTutar" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="KasaNu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UrunAdi" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Adet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tarih" Type="DateTime" Precision="0" />
+          <Property Name="MusteriAdi" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="MusteriSoyAdi" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Kasiyer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TcNu" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Stocks">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="UrunAdi" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Kdv" Type="Int32" />
+          <Property Name="BirimFiyati" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adet" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Stocks_Products" FromRole="Stocks" ToRole="Products" />
+        </EntityType>
+        <Association Name="FK_SalesLists_Cashiers">
+          <End Role="Cashiers" Type="Self.Cashiers" Multiplicity="0..1" />
+          <End Role="SalesLists" Type="Self.SalesLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cashiers">
+              <PropertyRef Name="CashierId" />
+            </Principal>
+            <Dependent Role="SalesLists">
+              <PropertyRef Name="CashierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Companyes">
+          <End Role="Companyes" Type="Self.Companyes" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companyes">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesLists_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="SalesLists" Type="Self.SalesLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="SalesLists">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesLists_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="SalesLists" Type="Self.SalesLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="SalesLists">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stocks_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Stocks" Type="Self.Stocks" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Stocks">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MarketContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cashiers" EntityType="Self.Cashiers" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" />
+          <EntitySet Name="Companyes" EntityType="Self.Companyes" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="SalesLists" EntityType="Self.SalesLists" />
+          <EntitySet Name="Stocks" EntityType="Self.Stocks" />
+          <AssociationSet Name="FK_SalesLists_Cashiers" Association="Self.FK_SalesLists_Cashiers">
+            <End Role="Cashiers" EntitySet="Cashiers" />
+            <End Role="SalesLists" EntitySet="SalesLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Companyes" Association="Self.FK_Products_Companyes">
+            <End Role="Companyes" EntitySet="Companyes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesLists_Customers" Association="Self.FK_SalesLists_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="SalesLists" EntitySet="SalesLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesLists_Products" Association="Self.FK_SalesLists_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="SalesLists" EntitySet="SalesLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stocks_Products" Association="Self.FK_Stocks_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Stocks" EntitySet="Stocks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ET_Market_DbModelStoreContainer" CdmEntityContainer="MarketContext">
+          <EntitySetMapping Name="Cashiers">
+            <EntityTypeMapping TypeName="ET_Market_DbModel.Cashiers">
+              <MappingFragment StoreEntitySet="Cashiers">
+                <ScalarProperty Name="CashierId" ColumnName="CashierId" />
+                <ScalarProperty Name="KasiyerAdi" ColumnName="KasiyerAdi" />
+                <ScalarProperty Name="KasiyerSoyad" ColumnName="KasiyerSoyad" />
+                <ScalarProperty Name="TcKimlik" ColumnName="TcKimlik" />
+                <ScalarProperty Name="CepTel" ColumnName="CepTel" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="GorevlioldKasa" ColumnName="GorevlioldKasa" />
+                <ScalarProperty Name="İseGirmeTarihi" ColumnName="İseGirmeTarihi" />
+                <ScalarProperty Name="İstenCikma" ColumnName="İstenCikma" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="ET_Market_DbModel.Categories">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companyes">
+            <EntityTypeMapping TypeName="ET_Market_DbModel.Companyes">
+              <MappingFragment StoreEntitySet="Companyes">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="ET_Market_DbModel.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="MusteriAdi" ColumnName="MusteriAdi" />
+                <ScalarProperty Name="MusteriSoyadi" ColumnName="MusteriSoyadi" />
+                <ScalarProperty Name="TcNu" ColumnName="TcNu" />
+                <ScalarProperty Name="CepTel" ColumnName="CepTel" />
+                <ScalarProperty Name="EvTel" ColumnName="EvTel" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="ET_Market_DbModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+                <ScalarProperty Name="UrunKodu" ColumnName="UrunKodu" />
+                <ScalarProperty Name="AlisFiyati" ColumnName="AlisFiyati" />
+                <ScalarProperty Name="SatisFiyati" ColumnName="SatisFiyati" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesLists">
+            <EntityTypeMapping TypeName="ET_Market_DbModel.SalesLists">
+              <MappingFragment StoreEntitySet="SalesLists">
+                <ScalarProperty Name="TcNu" ColumnName="TcNu" />
+                <ScalarProperty Name="Kasiyer" ColumnName="Kasiyer" />
+                <ScalarProperty Name="MusteriSoyAdi" ColumnName="MusteriSoyAdi" />
+                <ScalarProperty Name="MusteriAdi" ColumnName="MusteriAdi" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Adet" ColumnName="Adet" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+                <ScalarProperty Name="KasaNu" ColumnName="KasaNu" />
+                <ScalarProperty Name="ToplamTutar" ColumnName="ToplamTutar" />
+                <ScalarProperty Name="SalesListId" ColumnName="SalesListId" />
+                <ScalarProperty Name="CashierId" ColumnName="CashierId" />
+                <ScalarProperty Name="FaturaNu" ColumnName="FaturaNu" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stocks">
+            <EntityTypeMapping TypeName="ET_Market_DbModel.Stocks">
+              <MappingFragment StoreEntitySet="Stocks">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+                <ScalarProperty Name="Kdv" ColumnName="Kdv" />
+                <ScalarProperty Name="BirimFiyati" ColumnName="BirimFiyati" />
+                <ScalarProperty Name="Adet" ColumnName="Adet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

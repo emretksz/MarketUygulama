@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="32e47dfb0ade40de96d076e5b1d97a67" Name="Diagram1">
+        <EntityTypeShape EntityType="ET_Market_DbModel.Cashiers" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ET_Market_DbModel.Categories" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ET_Market_DbModel.Companyes" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ET_Market_DbModel.Customers" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="ET_Market_DbModel.Products" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ET_Market_DbModel.SalesLists" Width="1.5" PointX="7" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ET_Market_DbModel.Stocks" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="ET_Market_DbModel.FK_SalesLists_Cashiers" ManuallyRouted="false" />
+        <AssociationConnector Association="ET_Market_DbModel.FK_Products_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="ET_Market_DbModel.FK_Products_Companyes" ManuallyRouted="false" />
+        <AssociationConnector Association="ET_Market_DbModel.FK_SalesLists_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="ET_Market_DbModel.FK_SalesLists_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="ET_Market_DbModel.FK_Stocks_Products" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
