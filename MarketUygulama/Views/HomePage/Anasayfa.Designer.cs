@@ -69,10 +69,11 @@
             this.btnKasiyer.TabIndex = 0;
             this.btnKasiyer.Text = "Kasiyer İşlemleri";
             this.btnKasiyer.UseVisualStyleBackColor = true;
+            this.btnKasiyer.Click += new System.EventHandler(this.btnKasiyer_Click);
             // 
             // btnStockIslem
             // 
-            this.btnStockIslem.Location = new System.Drawing.Point(426, 31);
+            this.btnStockIslem.Location = new System.Drawing.Point(428, 31);
             this.btnStockIslem.Name = "btnStockIslem";
             this.btnStockIslem.Size = new System.Drawing.Size(87, 55);
             this.btnStockIslem.TabIndex = 0;
@@ -87,6 +88,7 @@
             this.btnSatisIslemleri.TabIndex = 0;
             this.btnSatisIslemleri.Text = "Satış İşlemleri";
             this.btnSatisIslemleri.UseVisualStyleBackColor = true;
+            this.btnSatisIslemleri.Click += new System.EventHandler(this.btnSatisIslemleri_Click);
             // 
             // btnCikis
             // 

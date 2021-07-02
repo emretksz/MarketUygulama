@@ -33,6 +33,7 @@
             this.txtEkle = new System.Windows.Forms.TextBox();
             this.btnEkle = new System.Windows.Forms.Button();
             this.btnSil = new System.Windows.Forms.Button();
+            this.chkIsActive = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFirma)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,9 +56,9 @@
             // 
             // txtEkle
             // 
-            this.txtEkle.Location = new System.Drawing.Point(115, 262);
+            this.txtEkle.Location = new System.Drawing.Point(131, 262);
             this.txtEkle.Name = "txtEkle";
-            this.txtEkle.Size = new System.Drawing.Size(100, 20);
+            this.txtEkle.Size = new System.Drawing.Size(249, 20);
             this.txtEkle.TabIndex = 2;
             // 
             // btnEkle
@@ -68,6 +69,7 @@
             this.btnEkle.TabIndex = 0;
             this.btnEkle.Text = "Ekle";
             this.btnEkle.UseVisualStyleBackColor = true;
+            this.btnEkle.Click += new System.EventHandler(this.btnEkle_Click);
             // 
             // btnSil
             // 
@@ -77,12 +79,24 @@
             this.btnSil.TabIndex = 0;
             this.btnSil.Text = "Sil";
             this.btnSil.UseVisualStyleBackColor = true;
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
+            // 
+            // chkIsActive
+            // 
+            this.chkIsActive.AutoSize = true;
+            this.chkIsActive.Location = new System.Drawing.Point(395, 264);
+            this.chkIsActive.Name = "chkIsActive";
+            this.chkIsActive.Size = new System.Drawing.Size(66, 17);
+            this.chkIsActive.TabIndex = 3;
+            this.chkIsActive.Text = "Aktif mi?";
+            this.chkIsActive.UseVisualStyleBackColor = true;
             // 
             // Firma_Ekle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(502, 443);
+            this.Controls.Add(this.chkIsActive);
             this.Controls.Add(this.txtEkle);
             this.Controls.Add(this.dgvFirma);
             this.Controls.Add(this.btnSil);
@@ -104,5 +118,6 @@
         private System.Windows.Forms.TextBox txtEkle;
         private System.Windows.Forms.Button btnEkle;
         private System.Windows.Forms.Button btnSil;
+        private System.Windows.Forms.CheckBox chkIsActive;
     }
 }

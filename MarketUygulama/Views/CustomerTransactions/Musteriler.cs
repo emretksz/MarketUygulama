@@ -47,6 +47,7 @@ namespace MarketUygulama.CustomerTransactions
             var delete = db.Customers.Find(id);
             db.Customers.Remove(delete);
             db.SaveChanges();
+      
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)

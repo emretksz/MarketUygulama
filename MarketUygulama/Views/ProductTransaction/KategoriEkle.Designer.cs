@@ -81,6 +81,7 @@
             this.btnDon.TabIndex = 5;
             this.btnDon.Text = "Geri Dön";
             this.btnDon.UseVisualStyleBackColor = true;
+            this.btnDon.Click += new System.EventHandler(this.btnDon_Click);
             // 
             // chkAktif
             // 

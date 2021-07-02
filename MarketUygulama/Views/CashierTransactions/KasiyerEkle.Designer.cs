@@ -64,6 +64,7 @@
             this.btnGeri.TabIndex = 13;
             this.btnGeri.Text = "Geri Dön";
             this.btnGeri.UseVisualStyleBackColor = true;
+            this.btnGeri.Click += new System.EventHandler(this.btnGeri_Click);
             // 
             // btnKaydet
             // 
@@ -73,6 +74,7 @@
             this.btnKaydet.TabIndex = 14;
             this.btnKaydet.Text = "Kaydet";
             this.btnKaydet.UseVisualStyleBackColor = true;
+            this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
             // 
             // label5
             // 

@@ -44,6 +44,7 @@
             this.dgvKasiyer.Name = "dgvKasiyer";
             this.dgvKasiyer.Size = new System.Drawing.Size(737, 196);
             this.dgvKasiyer.TabIndex = 0;
+            this.dgvKasiyer.DoubleClick += new System.EventHandler(this.dgvKasiyer_DoubleClick);
             // 
             // btnGeri
             // 
@@ -53,6 +54,7 @@
             this.btnGeri.TabIndex = 1;
             this.btnGeri.Text = "Geri Dön";
             this.btnGeri.UseVisualStyleBackColor = true;
+            this.btnGeri.Click += new System.EventHandler(this.btnGeri_Click);
             // 
             // txtSearch
             // 
@@ -61,6 +63,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(164, 28);
             this.txtSearch.TabIndex = 2;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // btnEkle
             // 
@@ -70,6 +73,7 @@
             this.btnEkle.TabIndex = 1;
             this.btnEkle.Text = "Ekle";
             this.btnEkle.UseVisualStyleBackColor = true;
+            this.btnEkle.Click += new System.EventHandler(this.btnEkle_Click);
             // 
             // btnSil
             // 
@@ -79,6 +83,7 @@
             this.btnSil.TabIndex = 1;
             this.btnSil.Text = "Sil";
             this.btnSil.UseVisualStyleBackColor = true;
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // label1
             // 
@@ -103,6 +108,7 @@
             this.Controls.Add(this.dgvKasiyer);
             this.Name = "Kasiyerİslemleri";
             this.Text = "Kasiyerİslemleri";
+            this.Load += new System.EventHandler(this.Kasiyerİslemleri_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvKasiyer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -21,8 +21,8 @@ namespace MarketUygulama.ProductTransaction
         MarketContext db = new MarketContext();
         private void Urunİslemleri_Load(object sender, EventArgs e)
         {
-            var urun = db.Products.ToList();
-            dgvUrunList.DataSource = urun;
+            var product = db.Products.ToList();
+            dgvUrunList.DataSource = product;
         }
 
         private void dgvUrunList_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -32,8 +32,8 @@ namespace MarketUygulama.ProductTransaction
         int id = 0;
         private void dgvUrunList_DoubleClick(object sender, EventArgs e)
         {
-            var secili = dgvUrunList.Rows[0].DataBoundItem as Products;
-            id = secili.ProductId;
+            var selected = dgvUrunList.Rows[0].DataBoundItem as Products;
+            id = selected.ProductId;
         }
 
         private void btnEkle_Click(object sender, EventArgs e)
@@ -45,7 +45,18 @@ namespace MarketUygulama.ProductTransaction
 
         private void btnSil_Click(object sender, EventArgs e)
         {
+            var delete = dgvUrunList.SelectedRows[0].DataBoundItem as Products;
+            db.Products.Remove(delete);
+            db.SaveChanges();
 
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            string search = txtSearch.Text;
+            var searchList = db.Products.Where(f => f.UrunAdi.Contains(search)).ToList();
+            dgvUrunList.DataSource = searchList;
+            
         }
     }
 }

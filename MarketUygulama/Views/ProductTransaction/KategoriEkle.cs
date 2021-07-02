@@ -1,4 +1,5 @@
 ﻿using MarketUygulama.Models;
+using MarketUygulama.ProductTransaction;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,21 +33,30 @@ namespace MarketUygulama.Views.ProductTransaction
             add.IsActive = chkAktif.Checked ? true : false;
             db.Categories.Add(add);
             db.SaveChanges();
+            dgvKategori.DataSource = db.Categories.ToList();
         }
         int id = 0;
         private void dgvKategori_DoubleClick(object sender, EventArgs e)
-        {
+        { /// 
             var sonuc = dgvKategori.SelectedRows[0].DataBoundItem as Categories;
             id = sonuc.CategoryId;
         }
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-         
-            var delete = db.Categories.Find(id);
+
+            var delete = dgvKategori.SelectedRows[0].DataBoundItem as Categories;
             db.Categories.Remove(delete);
             db.SaveChanges();
-            
+            dgvKategori.DataSource = db.Categories.ToList();
+
+        }
+
+        private void btnDon_Click(object sender, EventArgs e)
+        {
+            UrunEkleme frm = new UrunEkleme();
+            frm.Show();
+            this.Hide();
         }
     }
 }

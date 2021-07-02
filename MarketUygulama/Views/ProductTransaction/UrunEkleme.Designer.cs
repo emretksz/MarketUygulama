@@ -65,6 +65,7 @@
             this.btnGeriDon.TabIndex = 0;
             this.btnGeriDon.Text = "Geri Dön";
             this.btnGeriDon.UseVisualStyleBackColor = true;
+            this.btnGeriDon.Click += new System.EventHandler(this.btnGeriDon_Click);
             // 
             // label1
             // 
@@ -178,6 +179,7 @@
             this.btnFirnaEkle.TabIndex = 4;
             this.btnFirnaEkle.Text = "Firma ekle";
             this.btnFirnaEkle.UseVisualStyleBackColor = true;
+            this.btnFirnaEkle.Click += new System.EventHandler(this.btnFirnaEkle_Click);
             // 
             // btnKategoriEkle
             // 
@@ -187,6 +189,7 @@
             this.btnKategoriEkle.TabIndex = 4;
             this.btnKategoriEkle.Text = "Kategori Ekle";
             this.btnKategoriEkle.UseVisualStyleBackColor = true;
+            this.btnKategoriEkle.Click += new System.EventHandler(this.btnKategoriEkle_Click);
             // 
             // chkAktif
             // 
